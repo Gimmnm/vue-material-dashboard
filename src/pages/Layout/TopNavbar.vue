@@ -2,7 +2,7 @@
   <md-toolbar md-elevation="0" class="md-transparent">
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">{{ $route.name }}</h3>
+        <h3 class="md-title">{{ $route.meta.title }}</h3>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -48,7 +48,7 @@
               </drop-down>
             </md-list-item> -->
 
-            <li class="md-list-item">
+            <!-- <li class="md-list-item">
               <a
                 href="#/notifications"
                 class="md-list-item-router md-list-item-container md-button-clean dropdown"
@@ -74,7 +74,7 @@
                   </drop-down>
                 </div>
               </a>
-            </li>
+            </li> -->
 
             <md-list-item href="#/user">
               <i class="material-icons">person</i>

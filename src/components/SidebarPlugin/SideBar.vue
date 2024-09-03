@@ -13,13 +13,19 @@
       </a>
 
       <a
-        href="https://www.creative-tim.com/product/vue-material-dashboard"
+        href="https://hyperledger-fabric.readthedocs.io/en/latest/index.html"
         target="_blank"
         class="simple-text logo-normal"
       >
         {{ title }}
       </a>
     </div>
+
+    <div class="info" style="color: white;">
+      <strong>Organization </strong>: {{ user.org }}<br>
+      
+    </div>
+
     <div class="sidebar-wrapper">
       <slot name="content"></slot>
       <md-list class="nav">
@@ -34,7 +40,11 @@
           </sidebar-link>
         </slot>
       </md-list>
+     
     </div>
+    <div class="infot">
+         <strong>User </strong>: {{user.user}}<br>
+      </div>
   </div>
 </template>
 <script>
@@ -47,19 +57,19 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD",
+      default: "Computing World",
     },
     sidebarBackgroundImage: {
       type: String,
-      default: require("@/assets/img/sidebar-2.jpg"),
+      default: require("@/assets/img/sidebar-6.png"),
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/vue-logo.png"),
+      default: require("@/assets/img/tmplogo.png"),
     },
     sidebarItemColor: {
       type: String,
-      default: "green",
+      default: "blue",
       validator: (value) => {
         let acceptedValues = ["", "purple", "blue", "green", "orange", "red"];
         return acceptedValues.indexOf(value) !== -1;
@@ -86,6 +96,21 @@ export default {
       };
     },
   },
+  data() {
+    return {
+      user: {},
+    };
+  },
+  created() {
+    this.$axios.get('/api/v1/whoami/')
+      .then(response => {
+        this.user = JSON.parse(response.data.data);
+        console.log(this.machine);
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+      });
+  },
 };
 </script>
 <style>
@@ -93,5 +118,20 @@ export default {
   .nav-mobile-menu {
     display: none;
   }
+}
+.info {
+  color: rgba(255, 255, 255, 1) !important; 
+  padding: 10px; /* 添加一些内边距 */
+  text-align: center;
+}
+.infot {
+  position: absolute;
+  word-wrap: break-word; /* 确保单词在必要时可以断开换行 */
+  overflow-wrap: break-word; /* 标准属性 */
+  width: 100%;
+  bottom: 10px;
+  color: white; /* 设置字体颜色为白色 */
+  padding: 10px; /* 添加一些内边距 */
+  text-align: center;
 }
 </style>

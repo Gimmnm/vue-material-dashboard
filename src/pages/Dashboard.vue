@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div
+      <!-- <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
       >
         <chart-card
@@ -27,8 +27,8 @@
             </div>
           </template>
         </chart-card>
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
       >
         <chart-card
@@ -50,8 +50,8 @@
             </div>
           </template>
         </chart-card>
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
       >
         <chart-card
@@ -72,8 +72,8 @@
             </div>
           </template>
         </chart-card>
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
       >
         <stats-card data-background-color="green">
@@ -194,27 +194,27 @@
             </md-tabs>
           </template>
         </nav-tabs-card>
-      </div>
-    </div>
-  </div>
+      </div> -->
+    </div> 
+  </div>  
 </template>
 
 <script>
 import {
-  StatsCard,
+  // StatsCard,
   ChartCard,
-  NavTabsCard,
-  NavTabsTable,
-  OrderedTable,
+  // NavTabsCard,
+  // NavTabsTable,
+  // OrderedTable,
 } from "@/components";
 
 export default {
   components: {
-    StatsCard,
-    ChartCard,
-    NavTabsCard,
-    NavTabsTable,
-    OrderedTable,
+    // StatsCard,
+    // ChartCard,
+    // NavTabsCard,
+    // NavTabsTable,
+    // OrderedTable,
   },
   data() {
     return {

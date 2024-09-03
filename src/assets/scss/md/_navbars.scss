@@ -1,10 +1,10 @@
 .md-toolbar {
-  min-height: 56px;
-  padding: 10px 15px;
-  border-radius: 3px;
+  min-height: 53px;
+  padding: 0px 50px;
+  border-radius: 0px;
 
   &.md-transparent {
-    background-color: transparent !important;
+    background-color: #006064 !important;
     box-shadow: none;
 
     .md-title,
@@ -12,7 +12,8 @@
     &,
     &:hover,
     &:focus {
-      color: $black-color !important;
+      color: $white-color !important;
+      font-weight: bold;
     }
   }
 

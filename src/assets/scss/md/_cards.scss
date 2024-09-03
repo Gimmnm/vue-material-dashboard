@@ -51,10 +51,10 @@
   }
 
   .category:not([class*="text-"]) {
-    color: $gray-color;
+    color: $black-color;
   }
   .md-card-content {
-    padding: 15px 20px;
+    padding: 10px 10px;
 
     .category {
       margin: 0;
@@ -62,18 +62,18 @@
   }
 
   .md-card-header {
-    @include shadow-big();
+    // @include shadow-big();
     margin: -20px $margin-base 0;
     border-radius: $border-radius-base;
     padding: $padding-base;
-    background-color: $gray-color;
+    background-color: $white-color;
 
     .title {
-      color: $white-color;
+      color: $black-color;
     }
     .category {
       margin: 0;
-      color: rgba($white-color, 0.62);
+      color: rgba($black-color, 1);
     }
 
     a {
@@ -217,7 +217,7 @@
 
   [data-background-color="blue"],
   .md-tabs.md-info .md-tabs-navigation {
-    background: linear-gradient(60deg, $cyan-400, $cyan-600);
+    background: linear-gradient(60deg, $cyan-300, $cyan-400);
     @include shadow-big-color($brand-info);
   }
 
@@ -265,7 +265,7 @@
 
     i {
       font-size: 36px !important;
-      line-height: 56px;
+      line-height: 30px;
       width: 56px;
       height: 56px;
       color: $white-color !important;
@@ -273,7 +273,7 @@
   }
   .md-card-content {
     text-align: right;
-    padding-top: 10px;
+    padding-top: 5px;
   }
 }
 
@@ -287,7 +287,7 @@
   }
   .nav-tabs-title {
     float: left;
-    padding: 10px 10px 10px 0;
+    padding: 8px 8px 8px 0;
     line-height: 24px;
   }
 }

@@ -10,6 +10,8 @@
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0;
+  color: #000000;  // 设置字体颜色为纯黑色
+  text-decoration: none; // 默认不显示下划线
 
   will-change: box-shadow, transform;
   transition: box-shadow 0.2s $mdb-animation-curve-fast-out-linear-in,
@@ -19,16 +21,16 @@
       .md-toolbar-toggle
     )
     .md-ripple {
-    padding: 12px 30px;
+    padding: 12px 10px;
   }
 
   &:not(.md-just-icon) .md-button-content i {
-    font-size: 1.1rem !important;
+    font-size: 1.5rem !important;
     height: 17px;
   }
 
   &.md-wd {
-    min-width: 140px;
+    min-width: 0px;
   }
 
   &.md-block {
@@ -71,11 +73,13 @@
     &:hover {
       background-color: $white-color;
       color: $gray-light;
+      text-decoration: underline;
     }
     &.btn-simple {
       color: #ffffff;
       background: transparent;
       box-shadow: none;
+      
     }
   }
 
@@ -148,10 +152,10 @@
   // Size variations
   &.md-lg .md-ripple {
     font-size: $mdb-btn-font-size-lg;
-    padding: 18px 36px !important;
+    padding: 18px 24px !important;
   }
   &.md-sm .md-ripple {
-    padding: 0.40625rem 1.25rem !important;
+    padding: 0rem 0rem !important;
     font-size: $mdb-btn-font-size-sm;
   }
 
@@ -191,7 +195,7 @@
     display: flex;
     align-items: center;
     i {
-      font-size: 20px !important;
+      font-size: 30px !important;
     }
   }
 }

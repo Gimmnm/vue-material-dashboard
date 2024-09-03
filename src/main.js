@@ -25,6 +25,16 @@ import routes from "./routes/routes";
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import Notifications from "./components/NotificationPlugin";
+import axios from 'axios';
+
+// 配置Axios的全局默认值
+axios.defaults.baseURL = window.location.protocol+"//"+window.location.host; // 设置基础URL
+// axios.defaults.headers.common['Authorization'] = 'Bearer your-access-token'; // 设置默认的授权头
+// axios.defaults.headers.post['Content-Type'] = 'application/json'; // 为POST请求设置Content-Type 
+
+// 可以通过全局属性提供axios，使其在所有组件中可用
+Vue.prototype.$axios = axios;
+
 
 // MaterialDashboard plugin
 import MaterialDashboard from "./material-dashboard";

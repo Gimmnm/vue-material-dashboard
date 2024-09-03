@@ -19,14 +19,17 @@
 }
 
 .md-table-cell {
-  padding: 12px 8px;
+  padding: 0px 5px;
   font-size: $font-size-base;
+  width: 200px !important;       // 设置列宽
+  height: 8px !important;       // 设置行高
 }
 
 .md-table-head-label {
   font-size: $font-size-h5;
   padding-left: 8px;
-  font-weight: 300;
+  font-weight: bold;
+  color: black;
 }
 
 .md-table .md-table-row:hover .md-table-cell {
