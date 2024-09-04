@@ -176,7 +176,7 @@ export default {
     methods: {
         CreateID() {
             console.log("Creating ID with Machine Name:", this.machineName);
-            this.$router.push({name: "CreateMachineTemplateWithId", params: { Name: this.machineName }});
+            if (this.machineName != '') {this.$router.push({name: "CreateMachineTemplateWithId", params: { Name: this.machineName }});}
         }
     }
 };

@@ -2,13 +2,13 @@
   <!-- <div class="content"> -->
     <!-- <div class="md-layout">
       <div class="md-layout-item"> -->
-        <div class="overlay-page">
-          <div class="overlay-content">
+        <div class="overlay-page" @click="closeOverlayClick" ref="overlay">
+          <div class="overlay-content" @click.stop>
             <button @click="closeOverlay">✖</button>
           <md-card>
           <md-card-header data-background-color="gray">
             <div class="flex-container">
-              <h1 class="title"><strong>{{ machineId }}</strong></h1>
+              <h1 class="title"><strong>{{ machine.Name }}</strong></h1>
               <md-button style="padding: 10px 10px; min-width: 10px;" class="md-lg md-simple" @click="postTransaction()">
                 <strong>发布</strong>
               </md-button>
@@ -17,7 +17,48 @@
               </md-button>
             </div>
           </md-card-header>
-          
+          <md-card-content>
+            <div class="md-layout">
+            <p v-show="1==2">{{ machineId }} {{ machineName }}</p>
+            <!-- <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                <label>Machine Name</label>
+                <md-input v-model="machineName" type="text" readonly></md-input>
+                </md-field>
+            </div> -->
+            <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                <label>ID</label>
+                <md-input v-model="machineId" tyep="text" readonly></md-input>
+                </md-field>
+            </div>
+            <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                <label>租用价格</label>
+                <md-input v-model="formData.price" tyep="text"></md-input>
+                </md-field>
+            </div>
+            <div class="md-layout-item md-small-size-100 md-size-100">
+                <md-field>
+                <label>租用时间</label>
+                <md-input v-model="formData.duration" tyep="text"></md-input>
+                </md-field>
+            </div>
+            <!-- <div class="md-layout-item md-small-size-100 md-size-90">
+                <md-field>
+                <label>Code</label>
+                <md-input v-model="code" tyep="text" readonly></md-input>
+                </md-field>
+            </div>
+            <div class="md-layout-item md-size-10 text-left">
+                <md-button class="md-raised md-simple" @click="Copy()">Copy</md-button>
+            </div>
+            <div class="md-layout-item md-size-100 text-right">
+                <md-button class="md-raised md-info" @click="Back()">Back</md-button>
+            </div> -->
+            </div>
+        </md-card-content>
+<!--           
           <md-card-content>
             <div id="typography">
               <div class="row">
@@ -60,7 +101,7 @@
                 </div>
               </div>
             </div>
-          </md-card-content>
+          </md-card-content> -->
         </md-card>
           </div>
         </div>
@@ -86,11 +127,42 @@ export default {
       this.$router.push("/table_tr");
     },
     postTransaction() {
-    }
+      if (this.formData.price != '' && this.formData.duration != '') {
+        // console.log("hello");
+        this.$axios.post('/api/v1/market/put/' + this.machineId, this.formData)
+        .then(response => {
+          console.log('Success:', response.data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+        this.$router.push("/table_tr");
+      }
+    },
+    closeOverlayClick(event) {
+      if (event.target === this.$refs.overlay) {
+        this.$router.push("/table_my");
+      }
+    },
+  },
+  created() {
+    this.$axios.get('/api/v1/queryresource/'+this.machineId)
+      .then(response => {
+        this.machine = JSON.parse(response.data.data);
+        console.log(this.machine);
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+      });
   },
   data() {
     return {
       machineId: this.$route.params.itemId,
+      machine: {},
+      formData: {
+        duration: '',
+        price: '',
+      },
     };
   },
 };

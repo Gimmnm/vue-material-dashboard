@@ -148,7 +148,7 @@ export default {
       machineId: this.$route.params.itemId,
       machine: {},
       showCode: false,
-      codeSnippet: "curl " +window.location.protocol +"//"+window.location.host +  "/api/v1/setup/"+ this.machineId + " | bash",
+      codeSnippet: "curl " +window.location.protocol +"//"+window.location.host +  "/api/v1/setup/"+ this.$route.params.itemId + " | bash",
     };
   },
 };

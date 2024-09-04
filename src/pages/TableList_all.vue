@@ -4,11 +4,14 @@
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100" >
         <md-card class="md-card-plain">
-          <md-card-header data-background-color="gray">
-            <h3 class="title"><strong>All Resources </strong></h3>
-          </md-card-header>
+          <!-- <md-card-header data-background-color="gray"> -->
+            <!-- <h3 class="title"><strong> My Resources </strong></h3> -->
+            
+          <!-- </md-card-header> -->
+          <!-- ... -->
           <hr>
           <md-card-content>
+            <p v-show="1===2">{{ machines[0].Name }}</p>
             <SimpleTable_my :machines="machines"></SimpleTable_my>
           </md-card-content>
         </md-card>
@@ -24,50 +27,21 @@ export default {
   components: {
     SimpleTable_my,
   },
-
   data() {
     return {
-      machines: [{
-        name: "testmachine1",
-        id: 123456,
-        state: "正常",
-        register_date: "2024-08-31 12:42:12",
-        expiration_date: "2024-09-01 00:56:12",
-      },{
-        name: "testmachine2",
-        id: 654321,
-        state: "正常",
-        register_date: "2024-08-31 12:42:12",
-        expiration_date: "2024-09-01 00:56:12",
-      },
-      {
-        name: "testmachine3",
-        id: 123456,
-        state: "正常",
-        register_date: "2024-08-31 12:42:12",
-        expiration_date: "2024-09-01 00:56:12",
-      },{
-        name: "testmachine4",
-        id: 654321,
-        state: "正常",
-        register_date: "2024-08-31 12:42:12",
-        expiration_date: "2024-09-01 00:56:12",
-      },
-      {
-        name: "testmachine5",
-        id: 123456,
-        state: "正常",
-        register_date: "2024-08-31 12:42:12",
-        expiration_date: "2024-09-01 00:56:12",
-      },{
-        name: "testmachine6",
-        id: 654321,
-        state: "正常",
-        register_date: "2024-08-31 12:42:12",
-        expiration_date: "2024-09-01 00:56:12",
-      }]
+      machines: [],
     };
-  }
+  },
+  created() {
+    this.$axios.get('/api/v1/listresources')
+      .then(response => {
+        this.machines = JSON.parse(response.data.data);
+        console.log(this.machines);
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+      });
+  },
 
 };
 </script>
