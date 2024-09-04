@@ -29,7 +29,7 @@
           <!-- <md-button style="padding: 4px 3px; min-width: 0px;" class="md-sm md-simple" @click="Operation_gl(item)"><strong> 管理</strong></md-button> -->
           <md-button :disabled="isLoading" v-if="item.State==='normal'" style="padding: 4px 3px; min-width: 0px;" class="md-sm md-simple" @click="Operation_jy(item)"><strong>发布交易</strong></md-button>
 
-          <md-button :disabled="isLoading" v-if="item.State==='rented' && item.UserOrgDueDate < Date.now() * 1000" style="padding: 4px 3px; min-width: 0px;" class="md-sm md-simple" @click="replaceMachine(item)"><strong>收回算力</strong></md-button>
+          <md-button :disabled="isLoading || item.State === 'rented' && item.UserOrgDueDate >= Date.now() * 1000"  style="padding: 4px 3px; min-width: 0px;" class="md-sm md-simple" @click="replaceMachine(item)"><strong v-if="item.State==='rented' && item.UserOrgDueDate < Date.now() * 1000">收回算力</strong> <p v-if="item.State === 'rented' && item.UserOrgDueDate >= Date.now() * 1000" style="font-size: 12px;"><strong>到期时间</strong>:{{ formatTimestamp(item.UserOrgDueDate) }}</p></md-button>    
 
         </md-table-cell>
       </md-table-row>
@@ -59,6 +59,19 @@ export default {
     };
   },
   methods: {
+    formatTimestamp(timestamp) {
+      // console.log(timestamp);
+      const date = new Date(timestamp / 1000); // 将微秒转换为毫秒
+      return date.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+    },
     showInformation(item) {
       this.$router.push({name: "Typography_info", params: { itemId: item.Id }});
     },
@@ -81,10 +94,12 @@ export default {
       this.isLoading = true;
       this.$axios.get('/api/v1/claimresource/' + item.Id)
         .then(response => {
-          // console.log('Success:', response.data);
+          if (response.data.message === "error") {
+            this.$toast.error(''+response.data.error);
+          }
         })
         .catch(error => {
-          // console.error('Error:', error);
+          this.$toast.error(''+error);
         })
         .finally(() => {
           this.isLoading = false;

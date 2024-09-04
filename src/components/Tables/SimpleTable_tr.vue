@@ -19,7 +19,7 @@
         <md-table-cell md-label="OwnerOrg"><strong>{{ item.ownerOrg }}</strong></md-table-cell> 
         <md-table-cell md-label="买家数量"><strong>{{ Object.keys(item.buyers).length }}</strong></md-table-cell> 
         <md-table-cell md-label="价格"><strong>{{ item.price }}</strong></md-table-cell> 
-        <md-table-cell md-label="租用时长"><strong>{{ item.duration }}</strong></md-table-cell> 
+        <md-table-cell md-label="租用时长"><strong>{{ formatDuration(item.duration) }}</strong></md-table-cell> 
         <md-table-cell md-label="发布时间"><strong>{{ formatTimestamp(item.date) }}</strong></md-table-cell> 
         
 
@@ -84,6 +84,20 @@ export default {
         second: '2-digit',
         hour12: false
       });
+    },
+    formatDuration(milliseconds) {
+      milliseconds /= 1000;
+        if (milliseconds < 1000) {
+            return `${milliseconds} 毫秒`;
+        } else if (milliseconds < 60000) {
+            return `${(milliseconds / 1000).toFixed(1)} 秒`;
+        } else if (milliseconds < 3600000) {
+            return `${(milliseconds / 60000).toFixed(1)} 分钟`;
+        } else if (milliseconds < 86400000) {
+            return `${(milliseconds / 3600000).toFixed(1)} 小时`;
+        } else {
+            return `${(milliseconds / 86400000).toFixed(1)} 天`;
+        }
     },
     fetchData() {
       this.localTransactions = [...this.transactions];

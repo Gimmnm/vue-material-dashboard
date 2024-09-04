@@ -99,10 +99,12 @@ export default {
       this.isLoading = true;
       this.$axios.get('/api/v1/market/end/' + this.transaction.id)
       .then(response => {
-        // console.log('Success:', response.data);
+        if (response.data.message === "error") {
+          this.$toast.error(''+response.data.error);
+        }
       })
       .catch(error => {
-        // console.error('Error:', error);
+        this.$toast.error(''+error);
       })
       .finally(() => {
         this.isLoading = false;
@@ -134,20 +136,26 @@ export default {
   created() {
     this.$axios.get('/api/v1/market/get/'+this.trId)
       .then(response => {
+        if (response.data.message === "error") {
+          this.$toast.error(''+response.data.error);
+        }
         this.transaction = JSON.parse(response.data.data);
         console.log(this.transaction);
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        this.$toast.error(''+error);
       });
 
     this.$axios.get('/api/v1/whoami/')
       .then(response => {
+        if (response.data.message === "error") {
+          this.$toast.error(''+response.data.error);
+        }
         this.user = JSON.parse(response.data.data);
         console.log(this.machine);
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        this.$toast.error(''+error);
       });
   },
   data() {

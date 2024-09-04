@@ -9,6 +9,15 @@
         <md-table-cell md-label="出价"><strong>{{ item.price }}</strong></md-table-cell>
         <md-table-cell md-label="出价时间"><strong>{{ formatTimestamp(item.date) }}</strong></md-table-cell>
 
+        <md-table-cell md-label="结果">
+          <strong v-if="item.org === transaction.winner">
+            Winner
+          </strong>
+          <strong v-else>
+            /
+          </strong>
+        </md-table-cell> 
+
         <md-table-cell md-label="定价" v-if="user.org === transaction.resource.OwnerOrg && transaction.status==='open'">
 
           <md-button :disabled="isLoading" style="padding: 4px 3px; min-width: 0px;" class="md-sm md-simple" @click="Operation_cs(item)"><strong>锁定</strong></md-button>
@@ -39,6 +48,7 @@ export default {
       buyersWithIndex: [],
       user: {},
       isLoading : false,
+      buyerss: [],
     };
   },
   methods: {
@@ -47,10 +57,12 @@ export default {
       // console.log('/api/v1/market/lock/'+ this.transaction.id + '/' + item.org + '/' + item.price);
       this.$axios.get('/api/v1/market/lock/'+ this.transaction.id + '/' + item.org + '/' + item.price)
       .then(response => {
-
+        if (response.data.message === "error") {
+            this.$toast.error(''+response.data.error);
+          }
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        this.$toast.error(''+error);
       })
       .finally(() => {
         this.isLoading = false;
@@ -74,9 +86,21 @@ export default {
       });
     },
     fetchData() {
-      this.buyersWithIndex = Object.values(this.transaction.buyers).map((buyer, index) => ({
+      this.buyerss = Object.values(this.transaction.buyers).map((buyer, index) => ({
         ...buyer,
-        Number: index + 1  // 添加序号，从1开始
+      }));
+      this.buyerss.sort((a, b) => {
+        if (a.org === transaction.winner) {
+          return -1;
+        }
+        if (b.org === transaction.winner) {
+          return 1;
+        }
+        return a.price - b.price;
+      })
+      this.buyersWithIndex = this.buyerss.map((buyerss, index) => ({
+        ...buyerss,
+        Number: index + 1
       }));
     },
   },
@@ -84,11 +108,14 @@ export default {
     this.fetchData();
     this.$axios.get('/api/v1/whoami/')
       .then(response => {
+        if (response.data.message === "error") {
+            this.$toast.error(''+response.data.error);
+        }
         this.user = JSON.parse(response.data.data);
         console.log(this.machine);
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        this.$toast.error(''+error);
       });
   },
   mounted() {

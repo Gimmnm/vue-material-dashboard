@@ -19,13 +19,13 @@ const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    redirect: "/dashboard",
+    redirect: "/table_my",
     children: [
-      {
-        path: "dashboard",
-        name: "主页",
-        component: Dashboard,
-      },
+      // {
+      //   path: "dashboard",
+      //   name: "主页",
+      //   component: Dashboard,
+      // },
       {
         path: "user",
         name: "用户信息",

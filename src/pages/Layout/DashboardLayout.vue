@@ -8,10 +8,10 @@
       :title="title"
     >
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/dashboard">
-        <md-icon>dashboard</md-icon>
-        <p>主页</p>
-      </sidebar-link>
+      <!-- <sidebar-link to="/dashboard"> -->
+        <!-- <md-icon>dashboard</md-icon> -->
+        <!-- <p>主页</p> -->
+      <!-- </sidebar-link> -->
       <sidebar-link to="/create">
         <md-icon>unarchive</md-icon>
         <p>创建算力</p>

@@ -127,14 +127,16 @@ export default {
       this.$router.push("/table_tr");
     },
     postTransaction() {
-      this.isLoading = true;
       if (this.formData.price != '' && this.formData.duration != '') {
+        this.isLoading = true;
         this.$axios.post('/api/v1/market/put/' + this.machineId, this.formData)
         .then(response => {
-          console.log('Success:', response.data);
+          if (response.data.message === "error") {
+            this.$toast.error(''+response.data.error);
+          }
         })
         .catch(error => {
-          console.error('Error:', error);
+          this.$toast.error(''+error);
         })
         .finally(() => {
           this.isLoading = false;
@@ -151,11 +153,14 @@ export default {
   created() {
     this.$axios.get('/api/v1/queryresource/'+this.machineId)
       .then(response => {
+        if (response.data.message === "error") {
+          this.$toast.error(''+response.data.error);
+        }
         this.machine = JSON.parse(response.data.data);
         console.log(this.machine);
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        this.$toast.error(''+error);
       });
   },
   data() {

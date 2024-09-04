@@ -1,14 +1,13 @@
 <template>
-  <div class="content">
+  <div class="content">    
     <div class="md-layout">
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100" >
+      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
+        <div class="centered-container">
+          <h3 v-if="ifNothing"><strong>这里什么都没有...</strong></h3>
+        </div>
+      </div>
+      <div v-if="!ifNothing" class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100" >
         <md-card class="md-card-plain">
-          <!-- <md-card-header data-background-color="gray"> -->
-            <!-- <h3 class="title"><strong> My Resources </strong></h3> -->
-            
-          <!-- </md-card-header> -->
-          <!-- ... -->
           <hr>
           <md-card-content>
             <p v-show="1===2">{{ transactions[0].status }}</p>
@@ -31,6 +30,7 @@ export default {
     return {
       transactions: [],
       timer: null,
+      ifNothing: false,
     };
   },
   mounted() {
@@ -39,14 +39,24 @@ export default {
   },
   methods: {
     fetchData() {
-      console.log("hello");
-      console.log(this.transactions)
       this.$axios.get('/api/v1/market/list')
         .then(response => {
+          if (response.data.message === "error") {
+            this.$toast.error(''+response.data.error);
+          }
           this.transactions = JSON.parse(response.data.data);
         })
         .catch(error => {
-          console.error('Error fetching users:', error);
+          // this.$toast.error(''+error);
+        })
+        .finally(() => {
+          // this.$toast.info(this.transactions.length.toString());
+          if (this.transactions.length === 0) {
+          this.ifNothing = true; 
+          //  this.$toast.info("这里什么也没有....");
+          } else {
+            this.ifNothing = false;
+          }
         });
     }
   },
@@ -59,9 +69,14 @@ export default {
 };
 </script>
 <style scoped>
-  hr {
-    border: none; /* 移除默认边框 */
-    height: 2px; /* 设置线条高度 */
-    background-color: #333; /* 设置颜色 */
-  }
+hr {
+  border: none; /* 移除默认边框 */
+  height: 2px; /* 设置线条高度 */
+  background-color: #333; /* 设置颜色 */
+}
+.centered-container {
+  display: flex !important;
+  justify-content: center !important; /* 水平居中 */
+  align-items: center !important; /* 垂直居中 */
+}
 </style>

@@ -51,12 +51,15 @@ export default {
     mounted() {
         this.$axios.get('/api/v1/createresource/' + this.machineName)
             .then(response => {
+                if (response.data.message === "error") {
+                    this.$toast.error(''+response.data.error);
+                }
                 this.machineId = response.data.data;
                 this.code = "curl " +window.location.protocol +"//"+window.location.host +  "/api/v1/setup/"+ this.machineId + " | bash"
             })
             .catch(error => {
-                console.error('Error fetching users:', error);
-        });
+                this.$toast.error(''+error);
+            });
     },
     created() {
         if (this.$route.params.Name) {

@@ -110,10 +110,12 @@ export default {
         this.isLoading = true;
         this.$axios.get('/api/v1/market/price/' + this.transactionId + '/' + this.formData.price)
         .then(response => {
-          
+          if (response.data.message === "error") {
+            this.$toast.error(''+response.data.error);
+          }
         })
         .catch(error => {
-          console.error('Error:', error);
+          this.$toast.error(''+error);
         })
         .finally(() => {
           this.isLoading = false;

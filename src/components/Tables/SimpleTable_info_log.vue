@@ -70,11 +70,14 @@ export default {
     this.fetchData();
     this.$axios.get('/api/v1/whoami/')
       .then(response => {
+        if (response.data.message === "error") {
+            this.$toast.error(''+response.data.error);
+        }
         this.user = JSON.parse(response.data.data);
         console.log(this.machine);
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        this.$toast.error(''+error);
       });
   },
   mounted() {
