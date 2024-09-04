@@ -5,21 +5,15 @@ import UserProfile from "@/pages/UserProfile.vue";
 import TableList_all from "@/pages/TableList_all.vue";
 import TableList_my from "@/pages/TableList_my.vue";
 import TableList_tr from "@/pages/TableList_tr.vue";
-import Typography_gl from "@/pages/Typography_gl.vue";
 import Typography_jy from "@/pages/Typography_jy.vue";
-// import Typography_xf from "@/pages/Typography_xf.vue";
-// import Typography_jx from "@/pages/Typography_jx.vue";
 import Typography_info from "@/pages/Typography_info.vue";
+import Typography_jy_info from "@/pages/Typography_jy_info.vue";
 import Terminal from "@/pages/Terminal.vue";
 import CreateMachine from "@/pages/CreateMachine.vue";
-import CreateMachine_temp from "../pages/CreateMachine_temp.vue";
-import CreateMachine_bl from "../pages/CreateMachine_bl.vue";
+import CreateMachine_temp from "@/pages/CreateMachine_temp.vue";
+import CreateMachine_bl from "@/pages/CreateMachine_bl.vue";
 import CreateMachine_temp_id from "../pages/CreateMachine_temp_id.vue";
-// import Icons from "@/pages/Icons.vue";
-// import Maps from "@/pages/Maps.vue";
-// import Notifications from "@/pages/Notifications.vue";
-// import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
-
+import Typography_cj from "@/pages/Typography_cj.vue";
 
 const routes = [
   {
@@ -68,16 +62,22 @@ const routes = [
       //   meta: { title: '解析' } 
       // },
       {
-        path: "typography/gl/:itemId",
-        name: "Typography_gl",
-        component: Typography_gl,
-        meta: { title: '管理' } 
+        path: "typography/trinfo/:itemId",
+        name: "Typography_jy_info",
+        component: Typography_jy_info,
+        meta: { title: '交易详细信息' } 
       },
       {
         path: "typography/jy/:itemId",
         name: "Typography_jy",
         component: Typography_jy,
         meta: { title: '交易' } 
+      },
+      {
+        path: "typography/cj/:itemId",
+        name: "Typography_cj",
+        component: Typography_cj,
+        meta: { title: '出价'}
       },
       // {
       //   path: "typography/xf/:itemId",

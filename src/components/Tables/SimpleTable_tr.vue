@@ -20,6 +20,8 @@
         <md-table-cell md-label="买家数量"><strong>{{ Object.keys(item.buyers).length }}</strong></md-table-cell> 
         <md-table-cell md-label="价格"><strong>{{ item.price }}</strong></md-table-cell> 
         <md-table-cell md-label="租用时长"><strong>{{ item.duration }}</strong></md-table-cell> 
+        <md-table-cell md-label="发布时间"><strong>{{ formatTimestamp(item.date) }}</strong></md-table-cell> 
+        
 
         <!-- <md-table-cell md-label="所属组织"><strong>{{ item.OwnerOrg }}</strong></md-table-cell>
         
@@ -69,25 +71,20 @@ export default {
   },
   methods: {
     showInformation(item) {
-      // this.$router.push({name: "Typography_info", params: { itemId: item.Id }});
+      this.$router.push({name: "Typography_jy_info", params: { itemId: item.id }});
     },
-    // Operation_jx(item) {
-    //   this.$router.push({name: "Typography_jx", params: { itemId: item.id }});
-    // },
-    // Operation_gl(item) {
-    //   this.$router.push({name: "Typography_gl", params: { itemId: item.Id }});
-    // },
-    // Operation_jy(item) {
-    //   this.$router.push({name: "Typography_jy", params: { itemId: item.Id }});
-    // },
-    // Operation_xf(item) {
-    //   this.$router.push({name: "Typography_xf", params: { itemId: item.Id }});
-    // },
-    // Connection(item) {
-    //   this.$router.push({name: "Terminal", params: { itemId: item.Id }});
-    // },
-    // replaceMachine(item) {
-    // },
+    formatTimestamp(timestamp) {
+      const date = new Date(timestamp / 1000); // 将微秒转换为毫秒
+      return date.toLocaleString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+    },
     fetchData() {
       this.localTransactions = [...this.transactions];
       this.transactionWithIndex = this.localTransactions.map((localTransactions, index) => ({

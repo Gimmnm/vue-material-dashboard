@@ -26,6 +26,7 @@ import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import Notifications from "./components/NotificationPlugin";
 import axios from 'axios';
+import Spinner from 'vue-simple-spinner';
 
 // 配置Axios的全局默认值
 axios.defaults.baseURL = window.location.protocol+"//"+window.location.host; // 设置基础URL
@@ -54,6 +55,7 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+Vue.use(Spinner);
 
 /* eslint-disable no-new */
 new Vue({

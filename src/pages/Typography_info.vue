@@ -1,11 +1,8 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item">
-
-        <!-- <div class="overlay-page" @click="closeOverlayClick" ref="overlay">
-          <div class="overlay-content" @click.stop> -->
-            <!-- <button @click="closeOverlay">✖</button> -->
+      <div
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100" >
 
           <md-card>
             <md-card-header data-background-color="gray">
@@ -27,31 +24,9 @@
               <div v-if="showCode">
                   <pre><code>{{ codeSnippet }}</code></pre>
               </div>
-            </md-card-header>
-<!--           
-          <md-card-content>
-            <div id="typography">
-              <div class="row">
-                <div class="tim-typo">
-                  <h5>
-                    <span class="tim-note">Id</span>{{ machine.Id }}
-                    Dashboard
-                  </h5>
-                </div>
 
-              </div>
-            </div>
-          </md-card-content> -->
-
-
-        </md-card>
-
-        <md-card class="md-card-plain">
-              <md-card-header data-background-color="gray">
-                <!-- <h3 class="title"><strong>{{ machine.Name }}</strong></h3> -->
-                <!-- <hr> -->
-                <p class="category">
-                  <span style="float: left; width: 50%;"><strong>Id</strong>: {{ machine.Id }}</span>
+              <p class="category">
+                  <span style="float: left; width: 100%;"><strong>Id</strong>: {{ machine.Id }}</span>
                   <br>
                   <span style="float: left; width: 50%"><strong>State</strong>: {{machine.State}}</span> 
                   <span style="float: right; width: 50%;"><strong>OwnerOrg</strong>: {{ machine.OwnerOrg }} </span>
@@ -79,23 +54,33 @@
                   
 
                 </p>
-                <!-- <hr> -->
+            </md-card-header>
+        </md-card>
+      </div>
+      <div
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100" >
+        <md-card>
+              <md-card-header data-background-color="gray">
+                <p class="category"></p>
               </md-card-header>
               <md-card-content>
-                <!-- <SimpleTable_tr :transaction="transaction.bidders"></SimpleTable_tr> -->
+                <SimpleTable_info_log :machine="machine"></SimpleTable_info_log>
               </md-card-content>
-          </md-card>
-
-          <!-- </div>
-        </div> -->
-        
+        </md-card>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
+
+import SimpleTable_info_log from '../components/Tables/SimpleTable_info_log.vue';
+
 export default {
+  components: {
+    SimpleTable_info_log
+  },
   props: {
     dataBackgroundColor: {
       type: String,

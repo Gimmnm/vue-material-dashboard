@@ -8,9 +8,10 @@
           <md-card>
           <md-card-header data-background-color="gray">
             <div class="flex-container">
-              <h1 class="title"><strong>{{ machine.Name }}</strong></h1>
-              <md-button :disabled="isLoading" style="padding: 10px 10px; min-width: 10px;" class="md-lg md-simple" @click="postTransaction()">
-                <strong>发布</strong>
+              <h1 class="title"><strong>交易{{transactionId.slice(0, 10)}}...</strong></h1>
+              <vue-simple-spinner v-if="isLoading" size="medium" line-fg-color="#009900"></vue-simple-spinner>
+              <md-button :disabled="isLoading" style="padding: 10px 10px; min-width: 10px;" class="md-lg md-simple" @click="postPrice()">
+                <strong>出价</strong>
               </md-button>
               <md-button :disabled="isLoading" style="padding: 10px 10px; min-width: 10px;" class="md-lg md-simple" @click="gotoMarket()">
                 <strong>算力市场</strong>
@@ -19,43 +20,19 @@
           </md-card-header>
           <md-card-content>
             <div class="md-layout">
-            <p v-show="1==2">{{ machineId }} {{ machineName }}</p>
-            <!-- <div class="md-layout-item md-small-size-100 md-size-100">
-                <md-field>
-                <label>Machine Name</label>
-                <md-input v-model="machineName" type="text" readonly></md-input>
-                </md-field>
-            </div> -->
+            <p v-show="1===2">{{ transactionId }}</p>
             <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
                 <label>ID</label>
-                <md-input v-model="machineId" tyep="text" readonly></md-input>
+                <md-input v-model="transactionId" tyep="text" readonly></md-input>
                 </md-field>
             </div>
             <div class="md-layout-item md-small-size-100 md-size-100">
                 <md-field>
-                <label>租用价格</label>
+                <label>价格</label>
                 <md-input v-model="formData.price" tyep="text"></md-input>
                 </md-field>
             </div>
-            <div class="md-layout-item md-small-size-100 md-size-100">
-                <md-field>
-                <label>租用时间</label>
-                <md-input v-model="formData.duration" tyep="text"></md-input>
-                </md-field>
-            </div>
-            <!-- <div class="md-layout-item md-small-size-100 md-size-90">
-                <md-field>
-                <label>Code</label>
-                <md-input v-model="code" tyep="text" readonly></md-input>
-                </md-field>
-            </div>
-            <div class="md-layout-item md-size-10 text-left">
-                <md-button class="md-raised md-simple" @click="Copy()">Copy</md-button>
-            </div>
-            <div class="md-layout-item md-size-100 text-right">
-                <md-button class="md-raised md-info" @click="Back()">Back</md-button>
-            </div> -->
             </div>
         </md-card-content>
 <!--           
@@ -127,43 +104,35 @@ export default {
       this.$router.push("/table_tr");
     },
     postTransaction() {
-      this.isLoading = true;
-      if (this.formData.price != '' && this.formData.duration != '') {
-        this.$axios.post('/api/v1/market/put/' + this.machineId, this.formData)
+    },
+    postPrice() {
+      if (this.formData.price !== '') {
+        this.isLoading = true;
+        this.$axios.get('/api/v1/market/price/' + this.transactionId + '/' + this.formData.price)
         .then(response => {
-          console.log('Success:', response.data);
+          
         })
         .catch(error => {
           console.error('Error:', error);
         })
         .finally(() => {
           this.isLoading = false;
-          this.$router.push("/table_tr");
+          this.$router.go(-1); 
         });
       }
     },
     closeOverlayClick(event) {
       if (event.target === this.$refs.overlay) {
-        this.$router.push("/table_my");
+        this.$router.go(-1);
       }
     },
   },
   created() {
-    this.$axios.get('/api/v1/queryresource/'+this.machineId)
-      .then(response => {
-        this.machine = JSON.parse(response.data.data);
-        console.log(this.machine);
-      })
-      .catch(error => {
-        console.error('Error fetching users:', error);
-      });
   },
   data() {
     return {
-      machineId: this.$route.params.itemId,
-      machine: {},
+      transactionId: this.$route.params.itemId,
       formData: {
-        duration: '',
         price: '',
       },
       isLoading: false,
@@ -198,6 +167,10 @@ export default {
 }
 .title {
   margin-right: 10px;  /* 在标题和按钮之间添加一些间距 */
+}
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 </style>
