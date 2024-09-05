@@ -33,9 +33,9 @@ const routes = [
       },
       {
         path: "table_all",
-        name: "组织内算力",
+        name: "组内算力",
         component: TableList_all,
-        meta: { title: '组织内算力' } 
+        meta: { title: '组内算力' } 
       },
       {
         path: "table_tr",
@@ -101,13 +101,13 @@ const routes = [
         path: "create/template",
         name: "CreateMachineTemplate",
         component: CreateMachine_temp,
-        meta: { title: 'Create from template'}
+        meta: { title: 'Create from automation'}
       },
       {
         path: "create/template/id/:Name",
         name: "CreateMachineTemplateWithId",
         component: CreateMachine_temp_id,
-        meta: { title: 'Create from template'} 
+        meta: { title: 'Create from automation'} 
       },
       {
         path: "create/blank",

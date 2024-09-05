@@ -25,33 +25,29 @@ import routes from "./routes/routes";
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import Notifications from "./components/NotificationPlugin";
-import axios from 'axios';
+
 import Spinner from 'vue-simple-spinner';
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
-
-
+import axios from 'axios';
 // 配置Axios的全局默认值
 axios.defaults.baseURL = window.location.protocol+"//"+window.location.host; // 设置基础URL
-
-axios.interceptors.response.use((response) => {
-  // 检查响应数据是否为空
-  if (response.data === "" || response.data === null || Object.keys(response.data).length === 0) {
-    // 你可以在这里进行错误处理或者返回自定义的错误消息
-    // console.log("接收到空的响应数据");
-    return Promise.resolve({ data: null });
+axios.interceptors.response.use(
+  function (response) {
+    // 检查是否有数据，如果没有数据返回自定义的默认值
+    if (!response.data || response.data === '') {
+      console.warn('响应数据为空，返回默认值');
+      return { data: null }; // 返回一个默认对象，防止后续代码报错
+    }
+    return response;  // 正常返回数据
+  },
+  function (error) {
+    // 处理请求错误
+    return Promise.reject(error);
   }
-  // 如果响应数据不为空，直接返回响应
-  return response;
-}, (error) => {
-  // 处理响应错误
-  return Promise.reject(error);
-});
-// axios.defaults.headers.common['Authorization'] = 'Bearer your-access-token'; // 设置默认的授权头
-// axios.defaults.headers.post['Content-Type'] = 'application/json'; // 为POST请求设置Content-Type 
+);
 
-// 可以通过全局属性提供axios，使其在所有组件中可用
 Vue.prototype.$axios = axios;
 
 // MaterialDashboard plugin
@@ -70,7 +66,7 @@ const toastOptions = {
   position: 'top-right',
 
   // 关闭所有 toast 之前的延迟（毫秒）
-  timeout: 3000,
+  timeout: 10000,
 
   // 是否显示关闭按钮
   closeOnClick: true,

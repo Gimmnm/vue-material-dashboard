@@ -48,8 +48,19 @@ export default {
         if (response.data.message === "error") {
           this.$toast.error(''+response.data.error);
         }
-        this.machines = JSON.parse(response.data.data);
-        console.log(this.machines);
+        // this.machines = JSON.parse(response.data.data);
+        if (response.data.data) {
+            try {
+              this.machines = JSON.parse(response.data.data); // 尝试解析 JSON
+            } catch (error) {
+              // console.error("JSON解析错误:", error); // 捕获 JSON 解析错误
+              // this.$toast.error("数据解析错误");
+              this.machines = []; // 设置默认值以防后续操作报错
+            }
+          } else {
+            // console.warn("空数据返回");
+            this.machines = []; // 设置为空数组，避免后续长度计算错误
+          }
       })
       .catch(error => {
         this.$toast.error(''+error);
@@ -77,4 +88,10 @@ export default {
     height: 2px; /* 设置线条高度 */
     background-color: #333; /* 设置颜色 */
   }
+
+  .centered-container {
+  display: flex !important;
+  justify-content: center !important; /* 水平居中 */
+  align-items: center !important; /* 垂直居中 */
+}
 </style>

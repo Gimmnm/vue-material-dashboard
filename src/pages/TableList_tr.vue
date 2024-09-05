@@ -44,10 +44,22 @@ export default {
           if (response.data.message === "error") {
             this.$toast.error(''+response.data.error);
           }
-          this.transactions = JSON.parse(response.data.data);
+          if (response.data.data) {
+            try {
+              this.transactions = JSON.parse(response.data.data); // 尝试解析 JSON
+            } catch (error) {
+              // console.error("JSON解析错误:", error); // 捕获 JSON 解析错误
+              // this.$toast.error("数据解析错误");
+              this.transactions = []; // 设置默认值以防后续操作报错
+            }
+          } else {
+            // console.warn("空数据返回");
+            this.transactions = []; // 设置为空数组，避免后续长度计算错误
+          }
+          // this.transactions = JSON.parse(response.data.data);
         })
         .catch(error => {
-          // this.$toast.error(''+error);
+          this.$toast.error(''+error);
         })
         .finally(() => {
           // this.$toast.info(this.transactions.length.toString());

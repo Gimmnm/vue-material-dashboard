@@ -26,60 +26,30 @@
               </div>
 
               <p class="category">
-                <span style="float: left; width: 50%"><strong style="text-decoration: underline;">状态</strong>:</span>  <span style="float: right; width: 50%;"><strong style="text-decoration: underline;">系统信息</strong></span>
+                <span style="float: left; width: 50%; font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong style="text-decoration: underline; ">状态</strong>:</span>  <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace; "><strong style="font-family: Arial, sans-serif; text-decoration: underline;">系统信息</strong></span>
                 <br>
-                <span style="float: left; width: 50%"><strong>Id:</strong> {{machine.Id}}</span> <span style="float: right; width: 50%;"><strong>Os:</strong> {{ machine.Details.os }} </span>
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>Id:</strong> {{machine.Id}}</span> <span style="float: right; width: 50%; font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>Os:</strong> {{ machine.Details.os }} </span>
                 <br>
-                <span style="float: left; width: 50%"><strong>Status:</strong> {{machine.State}}</span> <span style="float: right; width: 50%;"><strong>Arch:</strong> {{ machine.Details.arch }} </span>          
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>Status:</strong> {{machine.State}}</span> <span style="float: right; width: 50%;"><strong>Arch:</strong> {{ machine.Details.arch }} </span>          
                 <br>
-                <span style="float: left; width: 50%"><strong>UserOrg:</strong> {{machine.UserOrg}}</span>           <span style="float: right; width: 50%;"><strong>Network:</strong> {{ machine.Details.network }} </span>
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>UserOrg:</strong> {{machine.UserOrg}}</span>           <span style="float: right; width: 50%; font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>Network:</strong> {{ machine.Details.network }} </span>
                 <br>
-                <span style="float: left; width: 50%"><strong>User:</strong> {{machine.User}}</span>          <span style="float: right; width: 50%;"><strong>Ram</strong> {{ machine.Details.ram }} </span>
+                <span style="float: left; width: 50%; font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>User:</strong> {{machine.User}}</span>          <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>Ram</strong> {{ machine.Details.ram }} </span>
                 <br>
-                <span style="float: left; width: 50%"><strong>OwnerOrg:</strong> {{machine.OwnerOrg}}</span>          <span style="float: right; width: 50%;"></span> 
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>OwnerOrg:</strong> {{machine.OwnerOrg}}</span>          <span style="float: right; width: 50%;"></span> 
                 <br>
-                <span style="float: left; width: 50%"><strong>UserOrgDueDate:</strong> {{machine.UserOrgDueDate}}</span>        <span style="float: right; width: 50%;"><strong style="text-decoration: underline;">连接信息</strong> </span>
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>UserOrgDueDate:</strong> {{machine.UserOrgDueDate}}</span>        <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong style="text-decoration: underline;">连接信息</strong> </span>
                 <br>
-                <span style="float: left; width: 50%;"></span>                                <span style="float: right; width: 50%;"><strong>IP:</strong> {{ machine.Details.ip }} </span>
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"></span>                                <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>IP:</strong> {{ machine.Details.ip }} </span>
                 <br>
-                <span style="float: left; width: 50%;"><strong style="text-decoration: underline;">CPU信息</strong></span>                                  <span style="float: right; width: 50%;"></span> 
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong style="text-decoration: underline;">CPU信息</strong></span>                                  <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"></span> 
                 <br>
-                <span style="float: left; width: 50%;"><strong>CPUSKU:</strong> {{ machine.Details.cpusku }} </span>               <span style="float: right; width: 50%;"><strong>GPU:</strong> {{ machine.Details.gpu }} </span>
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>CPUSKU:</strong> {{ machine.Details.cpusku }} </span>               <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>GPU:</strong> {{ machine.Details.gpu }} </span>
                 <br>
-                <span style="float: left; width: 50%;"><strong>CPU Cores:</strong> {{ machine.Details.cpucores }} </span>             <span style="float: right; width: 50%;"></span> 
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>CPU Cores:</strong> {{ machine.Details.cpucores }} </span>             <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"></span> 
                 <br>
-                <span style="float: left; width: 50%;"><strong>CPU Sockets:</strong> {{ machine.Details.cpusockets }} </span>              <span style="float: right; width: 50%;"></span>
+                <span style="float: left; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"><strong>CPU Sockets:</strong> {{ machine.Details.cpusockets }} </span>              <span style="float: right; width: 50%;font-family: 'Monaco', 'Courier New', Courier, monospace;"></span>
                 <br>
-
-
-
-                  <!-- <span style="float: left; width: 100%;"><strong>Id</strong>: {{ machine.Id }}</span>
-                  <br>
-                  <span style="float: left; width: 50%"><strong>State</strong>: {{machine.State}}</span> 
-                  <span style="float: right; width: 50%;"><strong>OwnerOrg</strong>: {{ machine.OwnerOrg }} </span>
-                  <br>
-                  <span style="float: left; width: 50%"><strong>UserOrg</strong>: {{ machine.UserOrg }} </span> 
-                  <span style="float: right; width: 50%;"><strong>UserOrgDueDate</strong>: {{ machine.UserOrgDueDate }} </span>
-                  <br>
-                  <span style="float: left; width: 50%"><strong>User</strong>: {{ machine.User }} </span> 
-                  <span style="float: right; width: 50%;"><strong>Os</strong>: {{ machine.Details.os }} </span>
-                  <br>
-                  <span style="float: left; width: 50%"><strong>Arch</strong>: {{ machine.Details.arch }} </span> 
-                  <span style="float: right; width: 50%;"><strong>CPUSKU</strong>: {{ machine.Details.cpusku }} </span>
-                  <br>                  
-                  <span style="float: left; width: 50%"><strong>CPUSockets</strong>: {{ machine.Details.cpusockets }} </span> 
-                  <span style="float: right; width: 50%;"><strong>CPUCores</strong>: {{ machine.Details.cpucores }} </span>
-                  <br>
-                  <span style="float: left; width: 50%"><strong>GPU</strong>: {{ machine.Details.gpu }} </span> 
-                  <span style="float: right; width: 50%;"><strong>GPUNum</strong>: {{ machine.Details.gpunums }} </span>
-                  <br>
-                  <span style="float: left; width: 50%"><strong>Network</strong>: {{ machine.Details.network }} </span> 
-                  <span style="float: right; width: 50%;"><strong>IP</strong>: {{ machine.Details.ip }} </span>
-                  <br>
-                  <span style="float: left; width: 50%"><strong>Ram</strong>: {{ machine.Details.ram }} </span> 
-                  <br> -->
-                  
-
                 </p>
             </md-card-header>
         </md-card>

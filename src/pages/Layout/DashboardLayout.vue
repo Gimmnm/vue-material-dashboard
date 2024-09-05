@@ -26,7 +26,7 @@
       </sidebar-link>
       <sidebar-link to="/table_all">
         <md-icon>content_paste</md-icon>
-        <p>组织内算力</p>
+        <p>组内算力</p>
       </sidebar-link>
       <sidebar-link to="/table_tr">
         <md-icon>library_books</md-icon>
@@ -92,7 +92,7 @@ export default {
     return {
       sidebarBackground: "blue",
       sidebarBackgroundImage: require("@/assets/img/sidebar-6.png"),
-      title: "Computing World",
+      title: "Block Compute",
     };
   },
 };

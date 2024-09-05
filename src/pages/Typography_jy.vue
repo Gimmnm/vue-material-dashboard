@@ -133,6 +133,8 @@ export default {
         .then(response => {
           if (response.data.message === "error") {
             this.$toast.error(''+response.data.error);
+          } else {
+            this.$router.push("/table_tr");
           }
         })
         .catch(error => {
@@ -140,7 +142,6 @@ export default {
         })
         .finally(() => {
           this.isLoading = false;
-          this.$router.push("/table_tr");
         });
       }
     },

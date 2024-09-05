@@ -13,7 +13,7 @@
 
         <md-table-cell md-label="CPU"><strong>{{ item.resource.Details.cpusku }}</strong></md-table-cell> 
         <md-table-cell md-label="GPU">
-          <strong v-if="item.resource.Details.gpu !==''">{{ item.resource.Details.gpu }}</strong>
+          <strong v-if="item.resource.Details.gpu !==''">{{ item.resource.Details.gpu.slice(0, 60) }}...</strong>
           <strong v-else>/</strong>
         </md-table-cell> 
         <md-table-cell md-label="OwnerOrg"><strong>{{ item.ownerOrg }}</strong></md-table-cell> 

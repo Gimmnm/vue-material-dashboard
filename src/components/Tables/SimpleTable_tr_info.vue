@@ -1,9 +1,12 @@
 <template>
   <div>
-    <md-table v-model="buyersWithIndex" :table-header-color="tableHeaderColor">
+
+    <div v-if="ifNothing" class="entered-container"><h3><strong>暂无买家</strong></h3> </div>
+
+    <md-table v-if="!ifNothing" v-model="buyersWithIndex" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
 
-        <md-table-cell md-label=""><strong>{{item.Number}}</strong></md-table-cell> 
+        <md-table-cell md-label="" class="number-column"><strong>{{item.Number}}</strong></md-table-cell> 
         
         <md-table-cell md-label="买家"><strong>{{ item.org }}</strong></md-table-cell>
         <md-table-cell md-label="出价"><strong>{{ item.price }}</strong></md-table-cell>
@@ -49,6 +52,7 @@ export default {
       user: {},
       isLoading : false,
       buyerss: [],
+      ifNothing: false,
     };
   },
   methods: {
@@ -102,6 +106,11 @@ export default {
         ...buyerss,
         Number: index + 1
       }));
+      if (this.buyersWithIndex.length === 0) {
+        this.ifNothing = true;
+      } else {
+        this.ifNothing = false;
+      }
     },
   },
   created() {
@@ -130,3 +139,15 @@ export default {
   }
 };
 </script>
+<style scoped>
+.centered-container {
+  display: flex !important;
+  justify-content: center !important; /* 水平居中 */
+  align-items: center !important; /* 垂直居中 */
+}
+.number-column {
+  flex-basis: 30px !important; /* 设置初始宽度为 50px */
+  flex-grow: 0 !important;     /* 不允许扩展 */
+  flex-shrink: 0 !important;   /* 不允许缩小 */
+}
+</style>

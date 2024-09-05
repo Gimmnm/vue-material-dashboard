@@ -20,7 +20,7 @@
         {{ title }}
       </a>
     </div>
-
+    <br>
     <div class="info" style="color: white;">
       <strong>Organization </strong>: {{ user.org }}<br>
       
@@ -57,7 +57,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Computing World",
+      default: "Block Compute",
     },
     sidebarBackgroundImage: {
       type: String,
